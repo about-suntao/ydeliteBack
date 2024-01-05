@@ -54,6 +54,7 @@
 
     // 菜单项点击处理函数
     const handleSelect = (root: string, index: string) => {
+        console.log('🚀 ~ file: SideBar.vue:57 ~ handleSelect ~ root:', root)
         vueRouter.push(`${index === '' ? '' : '/'}${index}`)
         activeIndex.value = index
     }
