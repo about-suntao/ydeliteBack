@@ -62,7 +62,7 @@ const router = createRouter({
     routes,
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
     if (to.path == '/login') {
         // 登录或者注册才可以往下进行
         next()
@@ -71,7 +71,7 @@ router.beforeEach((to, from, next) => {
         const token = localStorage.getItem('Authorization')
         // token 不存在
         if (token === null || token === '') {
-            ElMessage.error('请先登录哦')
+            ElMessage.error('请先登录')
             next('/login')
         } else {
             next()
