@@ -6,8 +6,10 @@
         <div class="user">
             <el-dropdown>
                 <span class="el-dropdown-link">
-                    <el-avatar> user </el-avatar>
-                    <span>user</span>
+                    <el-avatar>
+                        <el-image :src="usrInfo.avatar"></el-image>
+                    </el-avatar>
+                    <span>{{ usrInfo.name }}</span>
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>
@@ -29,6 +31,8 @@
     import { useRouter } from 'vue-router'
 
     const router = useRouter()
+
+    const usrInfo = JSON.parse(localStorage.getItem('Authorization') as string)
 
     const logOut = () => {
         router.push('/login')
@@ -58,10 +62,15 @@
                     outline: none !important;
                 }
                 color: white;
-                .el-avatar {
-                    background-color: white;
-                    color: black;
-                    margin-right: 10px;
+                .el-dropdown-link {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    .el-avatar {
+                        background-color: white;
+                        color: black;
+                        margin-right: 10px;
+                    }
                 }
             }
         }

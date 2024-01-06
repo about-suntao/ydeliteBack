@@ -79,15 +79,12 @@
                     <template #default="scoped">
                         <el-image
                             :src="scoped.row.idFrontside"
-                            preview-src-list="[scoped.row.idFrontside]"
-                            :initial-index="4"
-                            fit="[
-                                'fill',
-                                'contain',
-                                'cover',
-                                'none',
-                                'scale-down',
-                            ]"
+                            :preview-src-list="[scoped.row.idFrontside]"
+                            :max-scale="7"
+                            :min-scale="0.2"
+                            :initial-index="0"
+                            fit="cover"
+                            preview-teleported="true"
                         />
                     </template>
                 </el-table-column>
@@ -242,11 +239,11 @@
             overflow: hidden;
             .el-table {
                 height: 100%;
+                z-index: 1;
             }
         }
         .pagination {
             margin-top: 20px;
-            height: 100px;
             width: 100%;
             display: flex;
             justify-content: center;

@@ -91,6 +91,7 @@
             ruleForm.password = password
             ruleForm.rememberPassword = true
         }
+        localStorage.removeItem('Authorization')
     })
 
     const rules = reactive<FormRules<RuleForm>>({
@@ -120,7 +121,10 @@
                 }
                 Login(params).then((res) => {
                     if (res.code === 200) {
-                        localStorage.setItem('token', res.data?.token as string)
+                        localStorage.setItem(
+                            'Authorization',
+                            JSON.stringify(res.data)
+                        )
                         if (ruleForm.rememberPassword) {
                             localStorage.setItem(
                                 'userInfo',

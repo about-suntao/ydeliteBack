@@ -48,7 +48,10 @@ class RequestHttp {
 
         this.service.interceptors.request.use(
             (config: any) => {
-                const token = localStorage.getItem('token') || ''
+                const token =
+                    JSON.parse(
+                        localStorage.getItem('Authorization') as string
+                    ) || ''
                 return {
                     ...config,
                     headers: {
@@ -71,7 +74,7 @@ class RequestHttp {
                 const { data } = response // 解构
                 if (data.code === RequestEnums.OVERDUE) {
                     // 登录信息失效，应跳转到登录页面，并清空本地的token
-                    localStorage.setItem('token', '')
+                    localStorage.setItem('Authorization', '')
                     useRouter().replace({ path: '/login' })
                     return Promise.reject(data)
                 } // 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
