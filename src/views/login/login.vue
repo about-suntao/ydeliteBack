@@ -30,6 +30,7 @@
                         <el-form-item prop="password">
                             <el-input
                                 v-model="ruleForm.password"
+                                type="password"
                                 placeholder="请输入密码"
                             />
                         </el-form-item>
