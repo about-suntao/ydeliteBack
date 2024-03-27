@@ -1,21 +1,21 @@
 <template>
     <div class="studentInfo">
         <div class="search">
-            <el-form
-                stripe
-                :model="state.tableSearchParams"
-                label-position="right"
-            >
+            <el-form stripe :model="state.tableSearchParams" label-position="right">
                 <el-form-item label="姓名：">
                     <el-input
                         v-model="state.tableSearchParams.name"
                         placeholder="请输入姓名"
+                        clearable
+                        @change="getData"
                     />
                 </el-form-item>
                 <el-form-item label="性别：">
                     <el-select
                         v-model="state.tableSearchParams.sex"
                         placeholder="请选择性别"
+                        @change="getData"
+                        clearable
                     >
                         <el-option label="男" value="1" />
                         <el-option label="女" value="2" />
@@ -25,20 +25,20 @@
                     <el-input
                         v-model="state.tableSearchParams.idCard"
                         placeholder="请输入证件号码"
+                        @change="getData"
                         clearable
                     />
                 </el-form-item>
                 <el-form-item label="手机号：">
                     <el-input
+                        @change="getData"
                         v-model="state.tableSearchParams.phone"
                         placeholder="请输入手机号"
+                        clearable
                     />
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="onSearch">搜索</el-button>
-                    <el-button type="primary" @click="getData()">
-                        刷新
-                    </el-button>
+                    <el-button type="primary" @click="refresh"> 刷新 </el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -63,13 +63,7 @@
                     <template #default="scope">
                         <div style="display: flex; align-items: center">
                             <p>
-                                {{
-                                    scope.row.sex === 1
-                                        ? '男'
-                                        : scope.row.sex === 1
-                                        ? '女'
-                                        : ''
-                                }}
+                                {{ scope.row.sex === 1 ? '男' : scope.row.sex === 1 ? '女' : '' }}
                             </p>
                         </div>
                     </template>
@@ -177,7 +171,11 @@
         },
     })
 
-    const onSearch = () => {
+    const refresh = () => {
+        state.tableSearchParams.name = ''
+        state.tableSearchParams.sex = ''
+        state.tableSearchParams.idCard = ''
+        state.tableSearchParams.phone = ''
         getData()
     }
 
@@ -224,8 +222,6 @@
                 display: flex;
                 flex-wrap: wrap;
                 .el-form-item {
-                    min-width: 300px;
-                    max-width: 300px;
                     margin-right: 20px;
                     .el-select {
                         width: 100%;
