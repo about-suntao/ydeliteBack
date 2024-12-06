@@ -1,56 +1,73 @@
-//引入路由对象
-import LayoutVue from '@/components/layouts/Layout.vue'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import LayoutVue from '@/components/layouts/Layout.vue'
 
 const routes: Array<RouteRecordRaw> = [
+    // 后台管理系统的路由
     {
         path: '/',
-        name: '',
+        name: 'layout',
         component: LayoutVue,
-        redirect: '/login',
+        redirect: 'studentInfo',
         meta: {
-            isLayout: false,
-            isMenu: false,
+            title: '',
+            icon: '',
+            hidden: false,
         },
         children: [
             {
-                path: 'login',
-                name: '登录',
+                path: '',
+                name: 'info',
+                component: null,
                 meta: {
-                    isLayout: false,
-                    isMenu: false,
+                    title: '报名管理',
+                    icon: 'Search',
+                    hidden: false,
                 },
-                component: () => import('@/views/login/login.vue'),
+                children: [
+                    {
+                        path: '/studentInfo',
+                        name: 'studentInfo',
+                        component: () => import('@/views/registration/studentInfo/studentInfo.vue'),
+                        meta: {
+                            title: '报名信息',
+                            icon: '',
+                            hidden: false,
+                        },
+                    },
+                    {
+                        path: '/announcement',
+                        name: 'announcement',
+                        component: () => import('@/views/registration/note/note.vue'),
+                        meta: {
+                            title: '短信管理',
+                            icon: '',
+                            hidden: false,
+                        },
+                    },
+                ],
+            },
+            {
+                path: '/admin',
+                name: 'admin',
+                component: () => import('@/views/admin/admin.vue'),
+                meta: {
+                    title: '管理员账号',
+                    icon: 'Odometer',
+                    hidden: false,
+                },
             },
         ],
     },
+    // 登录页面
     {
-        path: '/',
-        name: '报名管理',
-        component: LayoutVue,
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/login/login.vue'),
         meta: {
-            isLayout: true,
-            isMenu: true,
+            title: '登录',
+            icon: '',
+            hidden: true,
         },
-        children: [
-            {
-                path: 'studentInfo',
-                name: '学生管理',
-                meta: {
-                    isLayout: true,
-                    isMenu: true,
-                },
-                component: () => import('@/views/registration/studentInfo/studentInfo.vue'),
-            },
-            {
-                path: 'note',
-                name: '短信通知',
-                meta: {
-                    isLayout: true,
-                },
-                component: () => import('@/views/registration/note/note.vue'),
-            },
-        ],
     },
 ]
 
@@ -58,7 +75,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 })
-
+// 路由守卫
 router.beforeEach((to, _from, next) => {
     if (to.path == '/login') {
         // 登录或者注册才可以往下进行
@@ -76,5 +93,4 @@ router.beforeEach((to, _from, next) => {
     }
 })
 
-//导出router
 export default router

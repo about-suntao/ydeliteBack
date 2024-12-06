@@ -78,7 +78,7 @@
                             :min-scale="0.2"
                             :initial-index="0"
                             fit="cover"
-                            preview-teleported="true"
+                            :preview-teleported="true"
                         />
                     </template>
                 </el-table-column>
@@ -125,27 +125,6 @@
         awards: string
         practice: string
     }
-
-    // interface User {
-    //     date: string
-    //     name: string
-    //     address: string
-    // }
-
-    // const tableRowClassName = ({
-    //     row,
-    //     rowIndex,
-    // }: {
-    //     row: User
-    //     rowIndex: number
-    // }) => {
-    //     if (rowIndex % 2 === 0) {
-    //         return 'doubleRow'
-    //     } else {
-    //         return 'singleRow'
-    //     }
-    //     return ''
-    // }
 
     const state: {
         tableData: Array<ITable>

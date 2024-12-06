@@ -38,11 +38,6 @@
                 <el-table-column type="selection" />
                 <el-table-column prop="name" label="姓名" />
                 <el-table-column prop="phone" label="手机号" />
-                <el-table-column prop="status" label="是否通知">
-                    <template #default="scope">
-                        <p>{{ scope.row.status ? '是' : '否' }}</p>
-                    </template>
-                </el-table-column>
                 <el-table-column label="操作" width="200">
                     <template #default="scope">
                         <el-button type="primary" size="small" @click="openEditPopup(scope.row)">编辑</el-button>
@@ -69,12 +64,6 @@
                     </el-form-item>
                     <el-form-item label="手机号:" prop="phone">
                         <el-input v-model.number="userForm.phone" placeholder="请输入手机号" />
-                    </el-form-item>
-                    <el-form-item label="是否通知:" prop="status">
-                        <el-select v-model="userForm.status" placeholder="请选择类型" clearable>
-                            <el-option label="是" :value="1" />
-                            <el-option label="否" :value="0" />
-                        </el-select>
                     </el-form-item>
                 </el-form>
             </div>
@@ -110,7 +99,6 @@
         id: null,
         name: '',
         phone: '',
-        status: 1,
     })
 
     const ruleFormRef = ref<any>(null)
@@ -153,7 +141,6 @@
             id: null,
             name: '',
             phone: '',
-            status: 1,
         }
         PopupStatus.value = 'add'
         Popup.value = true
@@ -164,7 +151,6 @@
             id: data.id,
             name: data.name,
             phone: data.phone,
-            status: data.status,
         }
         PopupStatus.value = 'edit'
         Popup.value = true
