@@ -14,40 +14,19 @@
                     <h2>深圳云顶学校管理系统</h2>
                 </div>
                 <div class="form_box">
-                    <el-form
-                        ref="ruleFormRef"
-                        :model="ruleForm"
-                        :rules="rules"
-                        size="large"
-                    >
+                    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" size="large">
                         <el-form-item prop="phone">
-                            <el-input
-                                v-model="ruleForm.phone"
-                                placeholder="请输入手机号"
-                            />
+                            <el-input v-model="ruleForm.phone" placeholder="请输入手机号" />
                         </el-form-item>
 
                         <el-form-item prop="password">
-                            <el-input
-                                v-model="ruleForm.password"
-                                type="password"
-                                placeholder="请输入密码"
-                            />
+                            <el-input v-model="ruleForm.password" type="password" placeholder="请输入密码" />
                         </el-form-item>
                         <el-form-item prop="rememberPassword">
-                            <el-checkbox
-                                v-model="ruleForm.rememberPassword"
-                                label="记住密码"
-                                size="large"
-                            />
+                            <el-checkbox v-model="ruleForm.rememberPassword" label="记住密码" size="large" />
                         </el-form-item>
                         <el-form-item>
-                            <el-button
-                                type="primary"
-                                @click="submitForm(ruleFormRef)"
-                            >
-                                登 录
-                            </el-button>
+                            <el-button type="primary" @click="submitForm(ruleFormRef)"> 登 录 </el-button>
                         </el-form-item>
                     </el-form>
                 </div>
@@ -85,9 +64,7 @@
 
     onMounted(() => {
         if (localStorage.getItem('userInfo')) {
-            const { phone, password } = JSON.parse(
-                localStorage.getItem('userInfo') as string
-            )
+            const { phone, password } = JSON.parse(localStorage.getItem('userInfo') as string)
             ruleForm.phone = phone
             ruleForm.password = password
             ruleForm.rememberPassword = true
@@ -120,17 +97,11 @@
                     phone: ruleForm.phone,
                     password: ruleForm.password,
                 }
-                Login(params).then((res) => {
+                Login(params).then((res: any) => {
                     if (res.code === 200) {
-                        localStorage.setItem(
-                            'Authorization',
-                            JSON.stringify(res.data)
-                        )
+                        localStorage.setItem('Authorization', JSON.stringify(res.data))
                         if (ruleForm.rememberPassword) {
-                            localStorage.setItem(
-                                'userInfo',
-                                JSON.stringify(params)
-                            )
+                            localStorage.setItem('userInfo', JSON.stringify(params))
                         } else {
                             localStorage.removeItem('userInfo')
                         }

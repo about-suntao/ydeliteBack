@@ -53,7 +53,7 @@
                     padding: '20px 0',
                     textAlign: 'center',
                 }"
-                :row-style="{
+                :cell-style="{
                     textAlign: 'center',
                 }"
             >
@@ -150,9 +150,9 @@
     const state: {
         tableData: Array<ITable>
         tableSearchParams: {
-            total: string
-            pageNum: string
-            pageSize: string
+            total: number
+            pageNum: number
+            pageSize: number
             name?: string
             sex?: string
             idCard?: string
@@ -161,9 +161,9 @@
     } = reactive({
         tableData: [],
         tableSearchParams: {
-            total: '0',
-            pageNum: '1',
-            pageSize: '10',
+            total: 0,
+            pageNum: 1,
+            pageSize: 10,
             name: '',
             sex: '',
             idCard: '',
@@ -199,11 +199,11 @@
     }
 
     const handleSizeChange = (val: number) => {
-        state.tableSearchParams.pageSize = `${val}`
+        state.tableSearchParams.pageSize = val
         getData()
     }
     const handleCurrentChange = (val: number) => {
-        state.tableSearchParams.pageNum = `${val}`
+        state.tableSearchParams.pageNum = val
         getData()
     }
 </script>

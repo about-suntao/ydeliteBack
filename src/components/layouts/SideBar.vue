@@ -4,16 +4,8 @@
             <el-icon v-if="isCollapse"><Expand /></el-icon>
             <el-icon v-else><Fold /></el-icon>
         </div>
-        <el-menu
-            :default-active="activeIndex"
-            class="el-menu-vertical-demo"
-            :collapse="isCollapse"
-        >
-            <el-sub-menu
-                v-for="route in menuRoutes"
-                :key="route.path"
-                :index="route.path"
-            >
+        <el-menu :default-active="activeIndex" class="el-menu-vertical-demo" :collapse="isCollapse">
+            <el-sub-menu v-for="route in menuRoutes" :key="route.path" :index="route.path">
                 <template #title>
                     <el-icon><location /></el-icon>
                     <span>{{ route.name }}</span>
@@ -45,9 +37,7 @@
     const vueRouter = useRouter()
 
     // 获取需要在菜单栏显示的路由
-    const menuRoutes = router.options.routes.filter(
-        (route) => route.meta?.isMenu
-    )
+    const menuRoutes = router.options.routes.filter((route) => route.meta?.isMenu)
 
     // 获取当前激活的菜单项
     const activeIndex = ref('')

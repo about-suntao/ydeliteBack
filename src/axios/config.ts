@@ -1,8 +1,12 @@
-const Config = {
-    // 线上
-    baseUrl: 'http://8.217.64.21:8082',
-    // 本地
-    // baseUrl: 'http://192.168.111.87:8081',
+const config: any = {
+    baseUrl: '',
+    socketUrl: '',
 }
 
-export default Config
+if (process.env.NODE_ENV === 'development') {
+    config.baseUrl = 'http://192.168.111.71:8081'
+} else if (process.env.NODE_ENV === 'production') {
+    config.baseUrl = 'http://applyback.ydelite.org'
+}
+
+export default config

@@ -2,8 +2,6 @@
 import LayoutVue from '@/components/layouts/Layout.vue'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-// ! meta.isLayout 是否需要header sidebar布局
-
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
@@ -42,17 +40,16 @@ const routes: Array<RouteRecordRaw> = [
                     isLayout: true,
                     isMenu: true,
                 },
-                component: () =>
-                    import('@/views/registration/studentInfo/studentInfo.vue'),
+                component: () => import('@/views/registration/studentInfo/studentInfo.vue'),
             },
-            // {
-            //     path: 'add',
-            //     name: '添加产品',
-            //     meta: {
-            //         isLayout: true,
-            //     },
-            //     component: () => import('@/views/product/addProduct.vue'),
-            // },
+            {
+                path: 'note',
+                name: '短信通知',
+                meta: {
+                    isLayout: true,
+                },
+                component: () => import('@/views/registration/note/note.vue'),
+            },
         ],
     },
 ]

@@ -1,9 +1,9 @@
-import axios from '@/axios/index'
+import axios from '@/axios/http'
 namespace IType {
     // 用户登录表单
     export interface StudentReqForm {
-        pageNum: string
-        pageSize: string
+        pageNum: number
+        pageSize: number
         name?: string
         sex?: string
         idCard?: string
